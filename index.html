@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lottery</title>
+</head>
+
+<body>
+	
+	<script language = "javascript">
+		
+		var chosen_nums = [0, 0, 0, 0, 0];
+		
+		//choose random numbers
+		for (i=0;i<5;i++) {
+			chosen_nums[i] = (Math.floor((Math.random() * 47) + 1));
+		}
+		
+		//sort array
+		chosen_nums.sort(function(a,b) {
+			return a - b;
+		});
+		
+		//choose lucky ball
+		var lucky_ball = (Math.floor((Math.random() * 17) + 1));
+		
+		//get winning numbers from user
+		var winning_nums = (prompt("What are the winning numbers?")).split(' ');
+		
+		//turn winning numbers into array of ints
+		for (i=0;i<5;i++) {
+			parseInt(winning_nums[i]);
+		}
+		
+		//get winning lucky ball from user
+		var winning_lucky_ball = parseInt(prompt("What is the winning lucky ball?"));
+		
+		//find number of matches
+		var num_matches = 0;
+		for (i=0;i<5;i++) {
+			for(j=0;j<5;j++) {
+				if (chosen_nums[i] == winning_nums[j]) {
+					num_matches++;
+				}
+			}
+		}
+		
+		//display your numbers 
+		document.write("Your numbers: ");
+		for (i=0;i<5;i++) {
+			document.write(chosen_nums[i] + ' ');
+		}
+		document.write('(' + lucky_ball + ')');
+		
+		//display winning numbers
+		document.write("<br>" + "Winning numbers: ");
+		for (i=0;i<5;i++) {
+			document.write(winning_nums[i] + ' ');
+		}
+		document.write('(' + winning_lucky_ball + ')');
+		
+		//display number of matches
+		document.write("<br>" + "Number of matches: " + num_matches + "<br>");
+		
+		//display whether the lucky ball matched
+		var lucky_ball_matched = false;
+		if (lucky_ball == winning_lucky_ball) {
+			document.write("The lucky ball matched");
+			lucky_ball_matched = true;
+		} else {
+			document.write("The lucky ball did not match");
+		}
+		
+		//calculate and display payout
+		document.write("<br>" + "Payout: ");
+		if (num_matches == 5) {
+			if (lucky_ball_matched == true) {
+				document.write("$7,000 a WEEK for LIFE");
+			} else {
+				document.write("$25,000 a YEAR for LIFE");
+			}
+		} else if (num_matches == 4) {
+			if (lucky_ball_matched == true) {
+				document.write("$5,000");
+			} else {
+				document.write("$200");
+			}
+		} else if (num_matches == 3) {
+			if (lucky_ball_matched == true) {
+				document.write("$150");
+			} else {
+				document.write("$20");
+			}
+		} else if (num_matches == 2) {
+			if (lucky_ball_matched == true) {
+				document.write("$25");
+			} else {
+				document.write("$3");
+			}
+		} else if (num_matches == 1) {
+			if (lucky_ball_matched == true) {
+				document.write("$6");
+			} else {
+				document.write("$0");
+			}
+			
+		} else if (num_matches == 0) {
+			if (lucky_ball_matched == true) {
+				document.write("$4");
+			} else {
+				document.write("$0");
+			} 
+		}
+		
+	</script>
+</body>
+</html>
